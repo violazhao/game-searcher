@@ -33,6 +33,35 @@ app.get('/api/v1/games', (req, res) => {
     });
 })
 
+app.post('/api/v1/addFavorite', (req, res) => {
+    let gameId = req.body.gameId;
+    let userId = req.body.userId;
+    query = 'INSERT INTO User_Favorites_Game (gameId, userId) VALUES(' + gameId + ',' + userId + ')';
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        res.send(result)
+    });
+})
+
+app.post('/api/v1/removeFavorite', (req, res) => {
+    let gameId = req.body.gameId;
+    let userId = req.body.userId;
+    query = 'DELETE FROM User_Favorites_Game (gameId, userId) WHERE gameId =' + gameId + 'AND userId =' + userId;
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        res.send(result)
+    });
+})
+
+app.get('/api/v1/getFavorite', (req, res) => {
+    let userId = req.body.userId;
+    query = 'SELECT * FROM User_Favorites_Game u JOIN Game g ON u.gameId = g.gameId WHERE u.userId =' + userId;
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        res.send(result)
+    });
+})
+
 app.get('/', (req, res) => {
     res.send("you've reached the backend")
 })
