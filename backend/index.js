@@ -9,9 +9,9 @@ app.use(cors())
 app.use(express.json())
 
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: '34.134.128.140',
     user: 'root',
-    password: '',
+    password: 'team20',
     database: 'game_searcher_db'
 });
 
