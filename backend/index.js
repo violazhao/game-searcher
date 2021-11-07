@@ -27,7 +27,9 @@ app.listen(5000, () => {
 })
 
 app.get('/api/v1/games', (req, res) => {
-    db.query("SELECT * FROM Game LIMIT 15", function (err, result) {
+    const { name, minimumRating } = req.query;
+    // console.log("NAME: ", name);
+    db.query(`SELECT * FROM Game WHERE name LIKE \"%${name || ""}%\" AND total_rating >= ${minimumRating || 0} LIMIT 15`, function (err, result) {
         if (err) throw err;
         res.send(result)
     });
