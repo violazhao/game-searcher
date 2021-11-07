@@ -4,6 +4,7 @@ import Home from "./containers/Home";
 import Navigation from "./containers/Navigation"
 import NotFound from "./containers/NotFound";
 import Admin from "./containers/Admin";
+import Login from "./containers/Login";
 // import Loading from "./containers/Loading";
 import Results from "./containers/Results";
 // import NoResults from "./containers/NoResults";
@@ -15,6 +16,10 @@ export default function Routes() {
                 <Route exact path="/game-searcher">
                     <Navigation />
                     <Home />
+                </Route>
+                <Route exact path="/game-searcher/login">
+                    <Navigation />
+                    <Login />
                 </Route>
                 <Route exact path="/game-searcher/admin">
                     <Navigation />

@@ -28,7 +28,7 @@ export default function Home() {
         <Form>
           <FormGroup>
             <Label for="gameName">
-              Game Name
+              Game Name:
             </Label>
             <Input
               type="text"
@@ -39,9 +39,10 @@ export default function Home() {
               required
             />
           </FormGroup>
+          <br></br>
           <FormGroup>
             <Label for="minRating">
-              Minimum Rating (out of 100)
+              Minimum Rating (out of 100):
             </Label>
             <Input
               type="text"
@@ -52,6 +53,7 @@ export default function Home() {
               onChange={(e) => setMinRating(e.target.value)}
             />
           </FormGroup>
+          <br></br>
             {/* <label> Game Name:
                 <input type="text" />
             </label>
