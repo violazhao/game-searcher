@@ -48,7 +48,7 @@ app.post('/api/v1/addFavorite', (req, res) => {
 app.post('/api/v1/removeFavorite', (req, res) => {
     let gameId = req.body.gameId;
     let userId = req.body.userId;
-    query = 'DELETE FROM User_Favorites_Game (gameId, userId) WHERE gameId =' + gameId + 'AND userId =' + userId;
+    query = 'DELETE FROM User_Favorites_Game WHERE gameId =' + gameId + ' AND userId = ' + userId;
     db.query(query, function (err, result) {
         if (err) throw err;
         res.send(result)
