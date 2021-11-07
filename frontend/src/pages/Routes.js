@@ -4,8 +4,10 @@ import Home from "./containers/Home";
 import Navigation from "./containers/Navigation"
 import NotFound from "./containers/NotFound";
 import Admin from "./containers/Admin";
+import Login from "./containers/Login";
 // import Loading from "./containers/Loading";
 import Results from "./containers/Results";
+import Pass from "./containers/Pass"
 // import NoResults from "./containers/NoResults";
 
 export default function Routes() {
@@ -16,9 +18,17 @@ export default function Routes() {
                     <Navigation />
                     <Home />
                 </Route>
+                <Route exact path="/game-searcher/login">
+                    <Navigation />
+                    <Login />
+                </Route>
                 <Route exact path="/game-searcher/admin">
                     <Navigation />
                     <Admin />
+                </Route>
+                <Route exact path="/game-searcher/pass">
+                    <Navigation />
+                    <Pass />
                 </Route>
                 {/* <Route exact path="/loading">
                     <Loading />
