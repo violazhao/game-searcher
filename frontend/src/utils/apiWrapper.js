@@ -29,3 +29,65 @@ export const getGames = (nameQuery, ratingQuery) => {
             error,
         }));
 };
+
+/**
+ * Add a favorite game for a user.
+ */
+ export const addFavorite = (gameId, userId) => {
+    let requestString = `${BASE_URL}/v1/addFavorite`;
+    let gameId = '21066';
+    let userId = '0';
+    requestString += `?gameId=${gameId}&userId=${userId}`;
+    console.log(`POST request sent to ${requestString}`);
+    return axios
+        .post(requestString, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
+            type: 'ADD_FAVORITE_FAIL',
+            error,
+        }));
+};
+
+/**
+ * Remove a favorite game for a user.
+ */
+ export const removeFavorite = (gameId, userId) => {
+    let requestString = `${BASE_URL}/v1/removeFavorite`;
+    let gameId = '21066';
+    let userId = '0';
+    requestString += `?gameId=${gameId}&userId=${userId}`;
+    console.log(`POST request sent to ${requestString}`);
+    return axios
+        .post(requestString, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
+            type: 'REMOVE_FAVORITE_FAIL',
+            error,
+        }));
+};
+
+/**
+ * Get the list of favorite games of a user.
+ */
+ export const getFavorite = (userId) => {
+    let requestString = `${BASE_URL}/v1/getFavorite`;
+    let userId = '0';
+    requestString += `?userId=${userId}`;
+    console.log(`POST request sent to ${requestString}`);
+    return axios
+        .get(requestString, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
+            type: 'GET_FAVORITE_FAIL',
+            error,
+        }));
+};
