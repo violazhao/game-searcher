@@ -18,14 +18,14 @@ export const getGames = (nameQuery, ratingQuery) => {
         requestString += `?name=${nameQuery}`;
     }
     console.log(`GET request sent to ${requestString}`);
-  return axios
-    .get(requestString, {
-      headers: {
-        'Content-Type': 'application/JSON',
-      },
-    })
-    .catch((error) => ({
-      type: 'GET_GAME_FAIL',
-      error,
-    }));
+    return axios
+        .get(requestString, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
+            type: 'GET_GAME_FAIL',
+            error,
+        }));
 };
