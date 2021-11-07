@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Login.css";
+import "./Pass.css";
 import {
   Button,
   Form,
@@ -8,49 +8,42 @@ import {
   Label,
 } from "reactstrap";
 
-export default function Login() {
+export default function Pass() {
   return (
     <div className="main">
-      <header className="Login-header">
+      <header className="Pass-header">
         <Form>
           <FormGroup>
-            <Label for="username">
-              Username:
+            <Label for="currPass">
+              Current Password:
             </Label>
             <Input
               type="text"
-              //value={username}
+              //value={currPass}
               id="username-input"
               // placeholder=""
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setCurrPass(e.target.value)}
               required
             />
           </FormGroup>
           <br></br>
           <FormGroup>
-            <Label for="passHash">
-              Password:
+            <Label for="newPass">
+              New Password:
             </Label>
             <Input
               type="text"
-              //value={passHash}
+              //value={newPass}
               id="game-min-rating-input"
               // placeholder=""
-              onChange={(e) => setPassHash(e.target.value)}
+              onChange={(e) => setNewPass(e.target.value)}
             />
           </FormGroup>
           <br></br>
         </Form>
         <Button
-            onClick={event =>  window.location.href='/game-searcher/admin'}
-            className="Login"
-        >
-          Login
-        </Button>
-        <br></br>
-        <Button
-            onClick={event =>  window.location.href='/game-searcher/pass'}
-            className="Login"
+            onClick={event =>  window.location.href='/game-searcher/login'}
+            className="Pass"
         >
           Change Password
         </Button>
