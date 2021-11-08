@@ -64,8 +64,6 @@ app.get('/api/v1/getFavorite', (req, res) => {
     });
 })
 
-<<<<<<< Updated upstream
-=======
 app.put('/api/v1/updatePassword', (req, res) => {
     query = "UPDATE User SET passHash = " + req.body.password + " WHERE userId = " + req.body.userId + ";"
     db.query(query, function(err, result) {
@@ -102,7 +100,6 @@ app.get('/api/v1/getGamesWithRatingsByPlatform', (req, res) => {
     })
 })
 
->>>>>>> Stashed changes
 app.get('/', (req, res) => {
     res.send("you've reached the backend")
 })
