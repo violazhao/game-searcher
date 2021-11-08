@@ -64,6 +64,45 @@ app.get('/api/v1/getFavorite', (req, res) => {
     });
 })
 
+<<<<<<< Updated upstream
+=======
+app.put('/api/v1/updatePassword', (req, res) => {
+    query = "UPDATE User SET passHash = " + req.body.password + " WHERE userId = " + req.body.userId + ";"
+    db.query(query, function(err, result) {
+        if (err) throw err;
+        res.send(result)
+    })
+})
+
+app.get('/api/v1/getNumGamesPerGenreByPlatformId', (req, res) => {
+    query = `SELECT g.genreId, gr.name, COUNT(g.gameId) 
+             FROM Genre gr, Game_BelongsTo_Genre g JOIN Platform_Sells_Game p ON g.gameId = p.gameId 
+             WHERE platformId = ` + req.body.platformId + ` AND gr.genreId = g.genreId 
+             GROUP BY gr.genreId 
+             LIMIT 15;
+            `
+    db.query(query, function(err, result) {
+        if (err) throw err;
+        res.send(result)
+    })
+})
+
+app.get('/api/v1/getGamesWithRatingsByPlatform', (req, res) => {
+    query = `(SELECT g.name, g.total_rating, platformId 
+             FROM Game g, Game_BelongsTo_Genre gbg JOIN Platform_Sells_Game psg ON gbg.gameId = psg.gameId
+             WHERE platformId = ` + req.body.platformId1 + ` and g.total_rating > ` + req.body.rating + `)
+             UNION
+             (SELECT g.name, g.total_rating, platformId 
+             FROM Game g, Game_BelongsTo_Genre gbg JOIN Platform_Sells_Game psg ON gbg.gameId = psg.gameId
+             WHERE platformId = ` + req.body.platformId2 + ` and g.total_rating > ` + req.body.rating + `);
+            `
+    db.query(query, function(err, result) {
+        if (err) throw err;
+        res.send(result)
+    })
+})
+
+>>>>>>> Stashed changes
 app.get('/', (req, res) => {
     res.send("you've reached the backend")
 })
