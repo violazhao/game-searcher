@@ -326,7 +326,7 @@ export default function Home() {
           Search
         </Button></div>}
         
-        {showResults && <Results games={games}/>}
+        {showResults && <Results games={games} isAdmin={false}/>}
       </header>
     </div>
   );
