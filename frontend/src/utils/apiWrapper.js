@@ -6,17 +6,36 @@ const BASE_URL = 'http://localhost:5000/api';
  * Returns the top 20 games requested by a user based on query attributes
  * Returns GET_SAMPLE_FAIL upon failure
  */
-export const getGames = (nameQuery, ratingQuery) => {
+export const getGames = (name, rating, platforms, genres) => {
     let requestString = `${BASE_URL}/v1/games`;
-    if (nameQuery && ratingQuery) {
-        requestString += `?name=${nameQuery}&minimumRating=${ratingQuery}`;
+    let queryFlag = false;
+
+    let nameQueryString = ``;
+    if (name) {
+        nameQueryString = `?name=${name}`;
+        queryFlag = true;
     }
-    else if (ratingQuery) {
-        requestString += `?minimumRating=${ratingQuery}`;
+
+    let ratingQueryString = ``;
+    if (rating) {
+        ratingQueryString = queryFlag ? `&minimumRating=${rating}` : `?minimumRating=${rating}`;
+        queryFlag = true;
     }
-    else if (nameQuery) {
-        requestString += `?name=${nameQuery}`;
+
+    let platformQueryString = ``;
+    if (platforms.length > 0) {
+        platformQueryString = queryFlag ? `&platforms=${platforms}` : `?platforms=${platforms}`;
+        queryFlag = true;
     }
+
+    let genreQueryString = ``;
+    if (genres.length) {
+        genreQueryString = queryFlag ? `&genres=${genres}` : `?genres=${genres}`;
+        queryFlag = true;
+    }
+
+    requestString += nameQueryString + ratingQueryString + platformQueryString + genreQueryString;
+
     console.log(`GET request sent to ${requestString}`);
     return axios
         .get(requestString, {
