@@ -242,6 +242,7 @@ export default function Home() {
 
     const resp = await getGames(name, minRating, final_platforms, final_genres);
     if (!resp.error) {
+      console.log(resp.data);
       setShowResults(true);
       setGames(resp.data);
     }
