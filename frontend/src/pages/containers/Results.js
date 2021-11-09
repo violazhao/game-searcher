@@ -13,7 +13,6 @@ const Results = ( {games} ) => {
           ))}
         </>
         <br></br>
-        
       </header>
     </div>
   )

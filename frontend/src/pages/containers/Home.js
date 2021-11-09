@@ -93,6 +93,7 @@ export default function Home() {
         {showResults && <div><Results games={games}/><button className="SearchAgain" onClick={() => setShowResults(false)}>
             Search Again
         </button></div>}
+        
       </header>
     </div>
   );
