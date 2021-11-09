@@ -64,8 +64,28 @@ app.get('/api/v1/getFavorite', (req, res) => {
     });
 })
 
-app.put('/api/v1/updatePassword', (req, res) => {
-    query = "UPDATE User SET passHash = " + req.body.password + " WHERE userId = " + req.body.userId + ";"
+app.get('/api/v1/isUser', (req, res) => {
+    const { username, password } = req.query;
+    query = 'SELECT count(userId) AS isValid FROM User WHERE username = "' + username + '" AND passHash = "' + password + '";';
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        res.send(result)
+    });
+})
+
+app.post('/api/v1/createUser', (req, res) => {
+    const { username, password } = req.query;
+    query = 'INSERT INTO User (userId, username, passHash) VALUES (SELECT LAST_INSERT_ID(), "' + username + '", ' + password + ');';
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        res.send(result)
+    });
+})
+
+app.put('/api/v1/updatePassword/:userId', (req, res) => {
+    const { userId } = req.params;
+    const { password } = req.body;
+    query = "UPDATE User SET passHash = " + password + " WHERE userId = " + userId + ";"
     db.query(query, function(err, result) {
         if (err) throw err;
         res.send(result)
