@@ -58,7 +58,7 @@ app.get('/api/v1/games', (req, res) => {
         WHERE ${genreSubquery}
         AND ${platformSubquery}`; 
     let query = 
-        `SELECT g.name, g.total_rating, g.summary
+        `SELECT g.gameId, g.name, g.total_rating, g.summary
         FROM Game g
         WHERE g.name LIKE \"%${name || ""}%\"
         AND g.total_rating >= ${minimumRating || 0}
