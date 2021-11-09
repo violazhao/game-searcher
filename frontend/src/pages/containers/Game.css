@@ -1,0 +1,26 @@
+.AddFavs {
+    position: absolute;
+    right:0px;
+    top: -7px;
+    border-radius: 8px;
+    background-color: #7F00FF;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1px 1px;
+    cursor: pointer;
+
+}
+
+.GameName {
+    position: relative;
+    width: 600px;
+    height: 30px;
+    text-align: left;
+    color: white;
+    font-size: 16px;
+}
