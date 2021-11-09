@@ -325,7 +325,6 @@ export default function Home() {
         >
           Search
         </Button></div>}
-        
         {showResults && <Results games={games}/>}
       </header>
     </div>

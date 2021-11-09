@@ -5,7 +5,8 @@ import Navigation from "./containers/Navigation"
 import NotFound from "./containers/NotFound";
 import Admin from "./containers/Admin";
 import Login from "./containers/Login";
-// import Loading from "./containers/Loading";
+import AQ1 from "./containers/AQ1";
+import AQ2 from "./containers/AQ2";
 import Results from "./containers/Results";
 import Pass from "./containers/Pass"
 import CreateAccount from "./containers/CreateAccount";
@@ -35,12 +36,17 @@ export default function Routes() {
                     <Navigation />
                     <CreateAccount />
                 </Route>
-                {/* <Route exact path="/loading">
-                    <Loading />
-                </Route> */}
                 <Route exact path="/game-searcher/results">
                     <Navigation />
                     <Results />
+                </Route>
+                <Route exact path="/game-searcher/aq1">
+                    <Navigation />
+                    <AQ1 />
+                </Route>
+                <Route exact path="/game-searcher/aq2">
+                    <Navigation />
+                    <AQ2 />
                 </Route>
                 {/* <Route exact path="/noresults">
                     <NoResults />
