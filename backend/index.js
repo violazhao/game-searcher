@@ -101,6 +101,62 @@ app.get('/api/v1/getFavorite', (req, res) => {
     });
 })
 
+app.get('/api/v1/isUser', (req, res) => {
+    const { username, password } = req.query;
+    query = 'SELECT count(userId) AS isValid FROM User WHERE username = "' + username + '" AND passHash = "' + password + '";';
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        res.send(result)
+    });
+})
+
+app.post('/api/v1/createUser', (req, res) => {
+    const { username, password } = req.query;
+    query = 'INSERT INTO User (userId, username, passHash) VALUES (SELECT LAST_INSERT_ID(), "' + username + '", ' + password + ');';
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        res.send(result)
+    });
+})
+
+app.put('/api/v1/updatePassword/:userId', (req, res) => {
+    const { userId } = req.params;
+    const { password } = req.body;
+    query = "UPDATE User SET passHash = " + password + " WHERE userId = " + userId + ";"
+    db.query(query, function(err, result) {
+        if (err) throw err;
+        res.send(result)
+    })
+})
+
+app.get('/api/v1/getNumGamesPerGenreByPlatformId', (req, res) => {
+    query = `SELECT g.genreId, gr.name, COUNT(g.gameId) 
+             FROM Genre gr, Game_BelongsTo_Genre g JOIN Platform_Sells_Game p ON g.gameId = p.gameId 
+             WHERE platformId = ` + req.body.platformId + ` AND gr.genreId = g.genreId 
+             GROUP BY gr.genreId 
+             LIMIT 15;
+            `
+    db.query(query, function(err, result) {
+        if (err) throw err;
+        res.send(result)
+    })
+})
+
+app.get('/api/v1/getGamesWithRatingsByPlatform', (req, res) => {
+    query = `(SELECT g.name, g.total_rating, platformId 
+             FROM Game g, Game_BelongsTo_Genre gbg JOIN Platform_Sells_Game psg ON gbg.gameId = psg.gameId
+             WHERE platformId = ` + req.body.platformId1 + ` and g.total_rating > ` + req.body.rating + `)
+             UNION
+             (SELECT g.name, g.total_rating, platformId 
+             FROM Game g, Game_BelongsTo_Genre gbg JOIN Platform_Sells_Game psg ON gbg.gameId = psg.gameId
+             WHERE platformId = ` + req.body.platformId2 + ` and g.total_rating > ` + req.body.rating + `);
+            `
+    db.query(query, function(err, result) {
+        if (err) throw err;
+        res.send(result)
+    })
+})
+
 app.get('/', (req, res) => {
     res.send("you've reached the backend")
 })
