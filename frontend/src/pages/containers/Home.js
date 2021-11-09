@@ -19,37 +19,37 @@ export default function Home() {
   const [showResults, setShowResults] = useState(false);
   const [games, setGames] = useState([]);
 
-  const selectStyles = {
-    control: (styles) => ({
-      ...styles,
-      minHeight: 40,
-      backgroundColor: "white",
-    }),
-    option: (styles, { data, isDisabled, isSelected }) => {
-      return {
-        ...styles,
-        color: "white",
-        backgroundColor: "#7F00FF",
-        ":active": {
-          ...styles[":active"],
-          color: "white",
-          backgroundColor: "black",
-        },
-      };
-    },
-    multiValue: (styles, { data }) => {
-      return {
-        ...styles,
-        backgroundColor: "black",
-      };
-    },
-    multiValueLabel: (styles, { data }) => {
-      return {
-        ...styles,
-        color: "white",
-      };
-    },
-  }
+  // const selectStyles = {
+  //   control: (styles) => ({
+  //     ...styles,
+  //     minHeight: 15,
+  //     backgroundColor: "white",
+  //   }),
+  //   option: (styles, { data, isDisabled, isSelected }) => {
+  //     return {
+  //       ...styles,
+  //       color: "white",
+  //       backgroundColor: "#7F00FF",
+  //       ":active": {
+  //         ...styles[":active"],
+  //         color: "white",
+  //         backgroundColor: "black",
+  //       },
+  //     };
+  //   },
+  //   multiValue: (styles, { data }) => {
+  //     return {
+  //       ...styles,
+  //       backgroundColor: "black",
+  //     };
+  //   },
+  //   multiValueLabel: (styles, { data }) => {
+  //     return {
+  //       ...styles,
+  //       color: "white",
+  //     };
+  //   },
+  // }
 
   const genres = [
     {
@@ -281,33 +281,39 @@ export default function Home() {
           <br></br>
           <FormGroup>
             <Label for="platforms">
-              Platforms
+              Platforms:
             </Label>
-            <Select
-              isMulti
-              // className="platform-select"
-              options={platforms}
-              styles={selectStyles}
-              placeholder="Select one or more platforms..."
-              onChange={setPlatforms}
-              value={selected_platforms}
-            />
+            <div className = "Dropdown">
+              <Select
+                isMulti
+                // className="platform-select"
+                options={platforms}
+                //styles={selectStyles}
+                placeholder="Select one or more platforms..."
+                onChange={setPlatforms}
+                value={selected_platforms}
+              />
+            </div>
           </FormGroup>
+          <br></br>
           <br></br>
           <FormGroup>
             <Label for="genres">
-              Genres
+              Genres:
             </Label>
-            <Select
-              isMulti
-              // className="platform-select"
-              options={genres}
-              styles={selectStyles}
-              placeholder="Select one or more genres..."
-              onChange={setGenres}
-              value={selected_genres}
-            />
+            <div className = "Dropdown">
+              <Select
+                isMulti
+                // className="platform-select"
+                options={genres}
+                //styles={selectStyles}
+                placeholder="Select one or more genres..."
+                onChange={setGenres}
+                value={selected_genres}
+              />
+            </div>
           </FormGroup>
+          <br></br>
           <br></br>
         </Form>
         <Button

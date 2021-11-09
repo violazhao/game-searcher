@@ -13,6 +13,19 @@
     color: white;
 }
 
+.Dropdown {
+    border-radius: 5px;
+    background-color: white;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    float: right;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 .Submit {
     border-radius: 8px;
     background-color: #7F00FF;
