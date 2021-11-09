@@ -9,12 +9,15 @@ import {
   Label
 } from "reactstrap";
 import Select from "react-select";
+import Results from "./Results";
 
 export default function Home() {
   const [name, setName] = useState("");
   const [minRating, setMinRating] = useState("");
   const [selected_platforms, setPlatforms] = useState([]);
   const [selected_genres, setGenres] = useState([]);
+  const [showResults, setShowResults] = useState(false);
+  const [games, setGames] = useState([]);
 
   const selectStyles = {
     control: (styles) => ({
@@ -226,7 +229,7 @@ export default function Home() {
     }
 ];
 
-  const logGame = async () => {
+  const getResults = async () => {
     const final_platforms = [];
     selected_platforms.map((platform) => {
       final_platforms.push(platform.label);
@@ -239,14 +242,15 @@ export default function Home() {
 
     const resp = await getGames(name, minRating, final_platforms, final_genres);
     if (!resp.error) {
-      console.log("GAMES: ", resp.data);
+      setShowResults(true);
+      setGames(resp.data);
     }
   }
 
   return (
     <div className="main">
       <header className="Home-header">
-        <Form>
+        {!showResults && <div><Form>
           <FormGroup>
             <Label for="gameName">
               Game Name:
@@ -304,13 +308,18 @@ export default function Home() {
               value={selected_genres}
             />
           </FormGroup>
+          <br></br>
         </Form>
         <Button
-            onClick={logGame}
+            onClick={
+              getResults
+            }
             className="Submit"
         >
           Search
-        </Button>
+        </Button></div>}
+        
+        {showResults && <Results games={games}/>}
       </header>
     </div>
   );

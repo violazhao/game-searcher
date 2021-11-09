@@ -54,9 +54,7 @@ export const getGames = (name, rating, platforms, genres) => {
  */
  export const addFavorite = (gameId, userId) => {
     let requestString = `${BASE_URL}/v1/addFavorite`;
-    let hardcodedGameId = '21066';
-    let hardcodedUserId = '0';
-    requestString += `?gameId=${hardcodedGameId}&userId=${hardcodedUserId}`;
+    requestString += `?gameId=${gameId}&userId=${userId}`;
     console.log(`POST request sent to ${requestString}`);
     return axios
         .post(requestString, {
@@ -75,9 +73,7 @@ export const getGames = (name, rating, platforms, genres) => {
  */
  export const removeFavorite = (gameId, userId) => {
     let requestString = `${BASE_URL}/v1/removeFavorite`;
-    let hardcodedGameId = '21066';
-    let hardcodedUserId = '0';
-    requestString += `?gameId=${v}&userId=${hardcodedUserId}`;
+    requestString += `?gameId=${gameId}&userId=${userId}`;
     console.log(`POST request sent to ${requestString}`);
     return axios
         .post(requestString, {
@@ -96,8 +92,7 @@ export const getGames = (name, rating, platforms, genres) => {
  */
  export const getFavorite = (userId) => {
     let requestString = `${BASE_URL}/v1/getFavorite`;
-    let hardcodedUserId = '0';
-    requestString += `?userId=${hardcodedUserId}`;
+    requestString += `?userId=${userId}`;
     console.log(`POST request sent to ${requestString}`);
     return axios
         .get(requestString, {
