@@ -8,19 +8,28 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import Results from "./Results";
 
 export default function Home() {
   const [name, setName] = useState("");
   const [minRating, setMinRating] = useState("");
+  const [showResults, setShowResults] = useState(false);
   // const [type, setType] = useState("");
   // const [genre, setGenre] = useState("");
+  const [games, setGames] = useState([]);
 
-  const logGame = async () => {
-    const resp = await getGames(name, minRating);
-    if (!resp.error) {
-      console.log("GAMES: ", resp.data);
-    }
+  const getResults = async () => {
+    const gamelist = await fetchGames()
+    setGames(gamelist)
+    console.log(gamelist);
   }
+  // Fetch Tasks
+  const fetchGames = async () => {
+    const resp = await getGames(name, minRating);
+
+    return resp.data
+  }
+
 
   return (
     <div className="main">
@@ -72,11 +81,15 @@ export default function Home() {
             <br></br> */}
         </Form>
         <Button
-            onClick={logGame}
+            onClick={
+              getResults,
+              () => setShowResults(!showResults)
+            }
             className="Submit"
         >
           Search
         </Button>
+        {showResults && <Results games={games}/>}
       </header>
     </div>
   );
