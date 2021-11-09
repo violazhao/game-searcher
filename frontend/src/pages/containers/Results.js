@@ -13,9 +13,7 @@ const Results = ( {games} ) => {
           ))}
         </>
         <br></br>
-        <button className="SearchAgain" onClick={event =>  window.location.href='/game-searcher'}>
-            Search Again
-        </button>
+        
       </header>
     </div>
   )

@@ -90,7 +90,9 @@ export default function Home() {
           Search
         </Button></div>}
         
-        {showResults && <Results games={games}/>}
+        {showResults && <div><Results games={games}/><button className="SearchAgain" onClick={() => setShowResults(false)}>
+            Search Again
+        </button></div>}
       </header>
     </div>
   );
