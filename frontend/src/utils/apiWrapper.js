@@ -31,12 +31,28 @@ export const getGames = (nameQuery, ratingQuery) => {
 };
 
 /**
+ * Update password
+ */
+export const updatePassword = (userId, newPassword) => {
+    let requestString = `${BASE_URL}/v1/updatePassword?userId=${userId}&password=${newPassword}`;
+    console.log(`PUT request sent to ${requestString}`)
+    return axios
+        .get(requestString, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
+            type: 'PUT_PASSWORD_FAIL',
+            error,
+        }));
+};
+
+/**
  * Add a favorite game for a user.
  */
  export const addFavorite = (gameId, userId) => {
     let requestString = `${BASE_URL}/v1/addFavorite`;
-    let gameId = '21066';
-    let userId = '0';
     requestString += `?gameId=${gameId}&userId=${userId}`;
     console.log(`POST request sent to ${requestString}`);
     return axios
@@ -56,8 +72,6 @@ export const getGames = (nameQuery, ratingQuery) => {
  */
  export const removeFavorite = (gameId, userId) => {
     let requestString = `${BASE_URL}/v1/removeFavorite`;
-    let gameId = '21066';
-    let userId = '0';
     requestString += `?gameId=${gameId}&userId=${userId}`;
     console.log(`POST request sent to ${requestString}`);
     return axios
@@ -77,7 +91,6 @@ export const getGames = (nameQuery, ratingQuery) => {
  */
  export const getFavorite = (userId) => {
     let requestString = `${BASE_URL}/v1/getFavorite`;
-    let userId = '0';
     requestString += `?userId=${userId}`;
     console.log(`POST request sent to ${requestString}`);
     return axios
