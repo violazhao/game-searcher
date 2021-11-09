@@ -20,6 +20,7 @@ export default function Home() {
 
   const getResults = async () => {
     const gamelist = await fetchGames()
+    setShowResults(true),
     setGames(gamelist)
     console.log(gamelist);
   }
@@ -34,7 +35,7 @@ export default function Home() {
   return (
     <div className="main">
       <header className="Home-header">
-        <Form>
+        {!showResults && <div><Form>
           <FormGroup>
             <Label for="gameName">
               Game Name:
@@ -82,13 +83,13 @@ export default function Home() {
         </Form>
         <Button
             onClick={
-              getResults,
-              () => setShowResults(!showResults)
+              getResults
             }
             className="Submit"
         >
           Search
-        </Button>
+        </Button></div>}
+        
         {showResults && <Results games={games}/>}
       </header>
     </div>
