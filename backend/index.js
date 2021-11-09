@@ -73,8 +73,8 @@ app.get('/api/v1/games', (req, res) => {
 })
 
 app.post('/api/v1/addFavorite', (req, res) => {
-    let gameId = req.body.gameId;
-    let userId = req.body.userId;
+    let gameId = req.query.gameId;
+    let userId = req.query.userId;
     query = 'INSERT INTO User_Favorites_Game (gameId, userId) VALUES(' + gameId + ',' + userId + ')';
     db.query(query, function (err, result) {
         if (err) throw err;
@@ -83,8 +83,8 @@ app.post('/api/v1/addFavorite', (req, res) => {
 })
 
 app.post('/api/v1/removeFavorite', (req, res) => {
-    let gameId = req.body.gameId;
-    let userId = req.body.userId;
+    let gameId = req.query.gameId;
+    let userId = req.query.userId;
     query = 'DELETE FROM User_Favorites_Game WHERE gameId =' + gameId + ' AND userId = ' + userId;
     db.query(query, function (err, result) {
         if (err) throw err;
@@ -93,7 +93,7 @@ app.post('/api/v1/removeFavorite', (req, res) => {
 })
 
 app.get('/api/v1/getFavorite', (req, res) => {
-    let userId = req.body.userId;
+    let userId = req.query.userId;
     query = 'SELECT * FROM User_Favorites_Game u JOIN Game g ON u.gameId = g.gameId WHERE u.userId =' + userId;
     db.query(query, function (err, result) {
         if (err) throw err;
