@@ -50,6 +50,62 @@ export const getGames = (name, rating, platforms, genres) => {
 };
 
 /**
+ * Update password
+ */
+export const updatePassword = (userId, newPassword) => {
+    let requestString = `${BASE_URL}/v1/updatePassword/${userId}`;
+    console.log(`PUT request sent to ${requestString}`)
+    return axios
+        .put(requestString, {
+           'password': newPassword
+        }, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
+            type: 'PUT_PASSWORD_FAIL',
+            error,
+        }));
+};
+
+/**
+ * Check if username and password combination is valid user
+ */
+export const isUser = (username, password) => {
+    let requestString = `${BASE_URL}/v1/isUser?username=${username}&password=${password}`;
+    console.log(`GET request sent to ${requestString}`)
+    return axios
+        .get(requestString, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
+            type: 'GET_USER_FAIL',
+            error,
+        }));
+};
+
+/**
+ * Create new user
+ */
+ export const createUser = (username, password) => {
+    let requestString = `${BASE_URL}/v1/createUser?username=${username}&password=${password}`;
+    console.log(`POST request sent to ${requestString}`)
+    return axios
+        .post(requestString, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
+            type: 'POST_USER_FAIL',
+            error,
+        }));
+};
+
+/**
  * Add a favorite game for a user.
  */
  export const addFavorite = (gameId, userId) => {

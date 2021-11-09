@@ -8,6 +8,7 @@ import Login from "./containers/Login";
 // import Loading from "./containers/Loading";
 import Results from "./containers/Results";
 import Pass from "./containers/Pass"
+import CreateAccount from "./containers/CreateAccount";
 // import NoResults from "./containers/NoResults";
 
 export default function Routes() {
@@ -29,6 +30,10 @@ export default function Routes() {
                 <Route exact path="/game-searcher/pass">
                     <Navigation />
                     <Pass />
+                </Route>
+                <Route exact path="/game-searcher/createaccount">
+                    <Navigation />
+                    <CreateAccount />
                 </Route>
                 {/* <Route exact path="/loading">
                     <Loading />

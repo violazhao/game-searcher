@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./Login.css";
-import { isUser } from "../../utils/apiWrapper"
+import "./CreateAccount.css";
+import { createUser } from "../../utils/apiWrapper"
 import {
   Button,
   Form,
@@ -9,24 +9,17 @@ import {
   Label,
 } from "reactstrap";
 
-export default function Login() {
+export default function CreateAccount() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const login = async () => {
-    const resp = await isUser(username, password);
-    console.log(resp.data[0].isValid);
-    if (resp.data[0].isValid == 1) {
-      console.log("it worked!");
-      window.location.href='/game-searcher/admin';
-    }
-    else {
-      console.log("Incorrect password or user does not exist");
-    }
-    if (!resp.error) {
-      console.log("Attempt Login");
-    }
+  const createAccount = async () => {
+      const resp = await createUser(username, password);
+      if (!resp.error) {
+          console.log("User: ", resp.data);
+          window.location.href='/game-searcher/admin';
+      }
   }
-
+    
   return (
     <div className="main">
       <header className="Login-header">
@@ -46,7 +39,7 @@ export default function Login() {
           </FormGroup>
           <br></br>
           <FormGroup>
-            <Label for="password">
+            <Label for="passHash">
               Password:
             </Label>
             <Input
@@ -60,21 +53,7 @@ export default function Login() {
           <br></br>
         </Form>
         <Button
-            onClick={login}
-            className="Login"
-        >
-          Login
-        </Button>
-        <br></br>
-        <Button
-            onClick={event =>  window.location.href='/game-searcher/pass'}
-            className="Login"
-        >
-          Change Password
-        </Button>
-        <br></br>
-        <Button
-            onClick={event =>  window.location.href='/game-searcher/createaccount'}
+            onClick={createAccount}
             className="Login"
         >
           Create Account
