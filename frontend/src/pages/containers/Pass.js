@@ -16,6 +16,7 @@ export default function Pass() {
     const resp = await updatePassword(userId, newPass);
     if (!resp.error) {
       console.log("Password: ", resp.data);
+      window.location.href='/game-searcher/login';
     }
   }
   return (
