@@ -68,7 +68,7 @@ app.get('/api/v1/games', (req, res) => {
     // send query to database and return result 
     db.query(query, function (err, result) {
         if (err) throw err;
-        res.send(result)
+        res.send(result);
     });
 })
 
@@ -78,7 +78,7 @@ app.post('/api/v1/addFavorite', (req, res) => {
     query = 'INSERT INTO User_Favorites_Game (gameId, userId) VALUES(' + gameId + ',' + userId + ')';
     db.query(query, function (err, result) {
         if (err) throw err;
-        res.send(result)
+        res.send(result);
     });
 })
 
@@ -88,7 +88,7 @@ app.post('/api/v1/removeFavorite', (req, res) => {
     query = 'DELETE FROM User_Favorites_Game WHERE gameId =' + gameId + ' AND userId = ' + userId;
     db.query(query, function (err, result) {
         if (err) throw err;
-        res.send(result)
+        res.send(result);
     });
 })
 
@@ -97,45 +97,45 @@ app.get('/api/v1/getFavorite', (req, res) => {
     query = 'SELECT * FROM User_Favorites_Game u JOIN Game g ON u.gameId = g.gameId WHERE u.userId =' + userId;
     db.query(query, function (err, result) {
         if (err) throw err;
-        res.send(result)
+        res.send(result);
     });
 })
 
 app.get('/api/v1/isUser', (req, res) => {
     const { username, password } = req.query;
-    query = 'SELECT count(userId) AS isValid FROM User WHERE username = "' + username + '" AND passHash = "' + password + '";';
+    let query = 'SELECT count(userId) AS isValid FROM User WHERE username = "' + username + '" AND passHash = "' + password + '";';
     db.query(query, function (err, result) {
         if (err) throw err;
-        res.send(result)
+        res.send(result);
     });
 })
 
 app.post('/api/v1/createUser', (req, res) => {
     const { username, password } = req.query;
-    query = 'INSERT INTO User (userId, username, passHash) VALUES (SELECT LAST_INSERT_ID(), "' + username + '", ' + password + ');';
+    let query = 'INSERT INTO User (userId, username, passHash) VALUES (SELECT LAST_INSERT_ID(), "' + username + '", ' + password + ');';
     db.query(query, function (err, result) {
         if (err) throw err;
-        res.send(result)
+        res.send(result);
     });
 })
 
-app.put('/api/v1/updatePassword/:userId', (req, res) => {
-    const { userId } = req.params;
+app.put('/api/v1/updatePassword/:username', (req, res) => {
+    const { username } = req.params;
     const { password } = req.body;
-    query = "UPDATE User SET passHash = " + password + " WHERE userId = " + userId + ";"
+    let query = "UPDATE User SET passHash = " + password + " WHERE username = '" + username + "';"
     db.query(query, function(err, result) {
         if (err) throw err;
-        res.send(result)
+        res.send(result);
     })
 })
 
 app.get('/api/v1/getNumGamesPerGenreByPlatformId', (req, res) => {
-    let query = `SELECT g.genreId, gr.name, COUNT(g.gameId) 
-             FROM Genre gr, Game_BelongsTo_Genre g JOIN Platform_Sells_Game p ON g.gameId = p.gameId 
-             WHERE platformId = ` + req.body.platformId + ` AND gr.genreId = g.genreId 
-             GROUP BY gr.genreId 
-             LIMIT 15;
-            `
+    let query = `SELECT g.genreId, gr.name, COUNT(g.gameId) as numGames
+                 FROM Genre gr, Game_BelongsTo_Genre g JOIN Platform_Sells_Game p ON g.gameId = p.gameId 
+                 WHERE platformId = 167 AND gr.genreId = g.genreId 
+                 GROUP BY gr.genreId 
+                 LIMIT 15;
+                 `
     db.query(query, function(err, result) {
         if (err) throw err;
         res.send(result)
@@ -148,18 +148,18 @@ app.get('/api/v1/getGamesWithRatingsByPlatform', (req, res) => {
              WHERE platformId IN (130, 167) AND g.total_rating > 50 ORDER BY psg.platformId DESC LIMIT 20`;
     db.query(query, function(err, result) {
         if (err) throw err;
-        res.send(result)
+        res.send(result);
     })
 })
 
 app.get('/', (req, res) => {
-    res.send("you've reached the backend")
+    res.send("you've reached the backend");
 })
 
 app.get('/api/v1/platforms', (req, res) => {
     db.query(`SELECT name FROM Platform`, function (err, result) {
         if (err) throw err;
-        res.send(result)
+        res.send(result);
     });
 })
 

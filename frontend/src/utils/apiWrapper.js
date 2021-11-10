@@ -52,8 +52,8 @@ export const getGames = (name, rating, platforms, genres) => {
 /**
  * Update password
  */
-export const updatePassword = (userId, newPassword) => {
-    let requestString = `${BASE_URL}/v1/updatePassword/${userId}`;
+export const updatePassword = (username, newPassword) => {
+    let requestString = `${BASE_URL}/v1/updatePassword/${username}`;
     console.log(`PUT request sent to ${requestString}`)
     return axios
         .put(requestString, {
@@ -162,6 +162,20 @@ export const isUser = (username, password) => {
         }));
 };
 
+export const getAQ1 = () => {
+    let requestString = `${BASE_URL}/v1/getNumGamesPerGenreByPlatformId`;
+    return axios
+        .get(requestString, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
+            type: 'GET_AQ1_FAIL',
+            error,
+        }));
+};
+
 export const getAQ2 = () => {
     let requestString = `${BASE_URL}/v1/getGamesWithRatingsByPlatform`;
     return axios
@@ -174,4 +188,5 @@ export const getAQ2 = () => {
             type: 'GET_AQ2_FAIL',
             error,
         }));
-}
+};
+

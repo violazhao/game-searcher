@@ -10,10 +10,10 @@ import {
 } from "reactstrap";
 
 export default function Pass() {
-  const [userId, setUserId] = useState("");
+  const [username, setUsername] = useState("");
   const [newPass, setNewPass] = useState("");
   const changePass = async () => {
-    const resp = await updatePassword(userId, newPass);
+    const resp = await updatePassword(username, newPass);
     if (!resp.error) {
       console.log("Password: ", resp.data);
       window.location.href='/game-searcher/login';
@@ -25,14 +25,14 @@ export default function Pass() {
         <Form>
         <FormGroup>
             <Label for="userId">
-              User ID:
+              Username:
             </Label>
             <Input
               type="text"
-              value={userId}
+              value={username}
               id="username-input"
               // placeholder=""
-              onChange={(e) => setUserId(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
           </FormGroup>

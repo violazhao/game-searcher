@@ -14,16 +14,16 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const login = async () => {
     const resp = await isUser(username, password);
-    console.log(resp.data[0].isValid);
-    if (resp.data[0].isValid == 1) {
-      console.log("it worked!");
-      window.location.href='/game-searcher/admin';
-    }
-    else {
-      console.log("Incorrect password or user does not exist");
-    }
     if (!resp.error) {
       console.log("Attempt Login");
+      console.log(resp.data[0].isValid);
+      if (resp.data[0].isValid == 1) {
+        console.log("it worked!");
+        window.location.href='/game-searcher/admin';
+      }
+      else {
+        console.log("Incorrect password or user does not exist");
+      }
     }
   }
 
