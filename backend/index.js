@@ -130,7 +130,7 @@ app.put('/api/v1/updatePassword/:userId', (req, res) => {
 })
 
 app.get('/api/v1/getNumGamesPerGenreByPlatformId', (req, res) => {
-    query = `SELECT g.genreId, gr.name, COUNT(g.gameId) 
+    let query = `SELECT g.genreId, gr.name, COUNT(g.gameId) 
              FROM Genre gr, Game_BelongsTo_Genre g JOIN Platform_Sells_Game p ON g.gameId = p.gameId 
              WHERE platformId = ` + req.body.platformId + ` AND gr.genreId = g.genreId 
              GROUP BY gr.genreId 
@@ -143,14 +143,9 @@ app.get('/api/v1/getNumGamesPerGenreByPlatformId', (req, res) => {
 })
 
 app.get('/api/v1/getGamesWithRatingsByPlatform', (req, res) => {
-    query = `(SELECT g.name, g.total_rating, platformId 
-             FROM Game g, Game_BelongsTo_Genre gbg JOIN Platform_Sells_Game psg ON gbg.gameId = psg.gameId
-             WHERE platformId = ` + req.body.platformId1 + ` and g.total_rating > ` + req.body.rating + `)
-             UNION
-             (SELECT g.name, g.total_rating, platformId 
-             FROM Game g, Game_BelongsTo_Genre gbg JOIN Platform_Sells_Game psg ON gbg.gameId = psg.gameId
-             WHERE platformId = ` + req.body.platformId2 + ` and g.total_rating > ` + req.body.rating + `);
-            `
+    let query = `SELECT g.gameId, g.name, g.total_rating, psg.platformId 
+             FROM Game g JOIN Platform_Sells_Game psg ON g.gameId = psg.gameId
+             WHERE platformId IN (130, 167) AND g.total_rating > 50 ORDER BY psg.platformId DESC LIMIT 20`;
     db.query(query, function(err, result) {
         if (err) throw err;
         res.send(result)
