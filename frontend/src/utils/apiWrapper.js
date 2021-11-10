@@ -161,3 +161,17 @@ export const isUser = (username, password) => {
             error,
         }));
 };
+
+export const getAQ2 = () => {
+    let requestString = `${BASE_URL}/v1/getGamesWithRatingsByPlatform`;
+    return axios
+        .get(requestString, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
+            type: 'GET_AQ2_FAIL',
+            error,
+        }));
+}
