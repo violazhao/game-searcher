@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 
 export default function Login() {
+  const [showResults, setShowResults] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const login = async () => {
@@ -23,6 +24,7 @@ export default function Login() {
       }
       else {
         console.log("Incorrect password or user does not exist");
+        setShowResults(true);
       }
     }
   }
@@ -30,6 +32,15 @@ export default function Login() {
   return (
     <div className="main">
       <header className="Login-header">
+        {showResults ?
+          <div className="Error">
+            Incorrect Login
+          </div>
+          :
+          <div>
+            
+          </div>
+        }
         <Form>
           <FormGroup>
             <Label for="username">
