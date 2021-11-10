@@ -18,11 +18,20 @@
     background-color: #7F00FF;
     border: none;
     color: white;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin: 1px 1px;
     cursor: pointer;
+}
+
+.Update {
+    color: white;
+    background-color: #282c34;
+    border: none;
+    padding: 5px;
+    font-size: 15px;
+    text-decoration: underline;
 }

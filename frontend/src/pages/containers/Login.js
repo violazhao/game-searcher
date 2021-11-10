@@ -68,14 +68,13 @@ export default function Login() {
         <br></br>
         <Button
             onClick={event =>  window.location.href='/game-searcher/pass'}
-            className="Login"
+            className="Update"
         >
           Change Password
         </Button>
-        <br></br>
         <Button
             onClick={event =>  window.location.href='/game-searcher/createaccount'}
-            className="Login"
+            className="Update"
         >
           Create Account
         </Button>
