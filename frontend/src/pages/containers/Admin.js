@@ -36,18 +36,18 @@ export default function Admin() {
       <header className="Admin-header">
         <h1 style={{ marginTop: 16 }}>Your Favorite Games</h1>
         {showResults ? 
-          <div>
-            <p>You may also like:</p>
+          <div class = "Recommended">
+            <p class = "recHeader">Your Recommended Games:</p>
             {recGames.map((recGame) => { return (
               <div key = {recGame.gameId}>
                 <br></br>
-                <p>Name: {recGame.game}</p>
+                <p> {recGame.game}</p>
                 <p>Rating: {recGame.rating}</p>
               </div>
             )})}
           </div>
           : 
-          <button className="Back" onClick={fetchRecGames}>Recommended</button>
+          <button className="getRecs" onClick={fetchRecGames}>Click to see your recommended games!</button>
         }
         <Results games={games} isAdmin={true}/>
         <br></br>
