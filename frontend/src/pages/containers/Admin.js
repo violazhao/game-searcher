@@ -25,6 +25,7 @@ export default function Admin() {
     <div className="admin">
       <header className="Admin-header">
         <h1 style={{ marginTop: 16 }}>Your Favorite Games</h1>
+        <p>You may also like: </p>
         <Results games={games} isAdmin={true}/>
         <br></br>
       </header>
