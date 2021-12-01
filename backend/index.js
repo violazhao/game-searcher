@@ -93,10 +93,10 @@ app.delete('/api/v1/removeFavorite', (req, res) => {
 })
 
 app.get('/api/v1/getRecommendations', (req, res) => {
-    query = 'CALL recommending_procedure';
+    query = 'CALL recommending_procedure()';
     db.query(query, function (err, result) {
         if (err) throw err;
-        res.send(result);
+        res.send(result[0]);
     });
 })
 

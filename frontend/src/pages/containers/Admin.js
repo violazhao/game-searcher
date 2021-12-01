@@ -41,8 +41,8 @@ export default function Admin() {
             {recGames.map((recGame) => { return (
               <div key = {recGame.gameId}>
                 <br></br>
-                <p>Name: {recGame.name}</p>
-                <p>Rating: {recGame.total_rating}</p>
+                <p>Name: {recGame.game}</p>
+                <p>Rating: {recGame.rating}</p>
               </div>
             )})}
           </div>
