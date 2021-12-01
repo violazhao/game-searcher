@@ -92,6 +92,14 @@ app.delete('/api/v1/removeFavorite', (req, res) => {
     });
 })
 
+app.get('/api/v1/getRecommendations', (req, res) => {
+    query = 'CALL recommending_procedure';
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+})
+
 app.get('/api/v1/getFavorite', (req, res) => {
     let userId = req.query.userId;
     query = 'SELECT * FROM User_Favorites_Game u JOIN Game g ON u.gameId = g.gameId WHERE u.userId =' + userId;

@@ -50,6 +50,24 @@ export const getGames = (name, rating, platforms, genres) => {
 };
 
 /**
+ * Gets Recommended Games
+ */
+export const getRecommendedGames = (username, newPassword) => {
+    let requestString = `${BASE_URL}/v1/getRecommendations`;
+    console.log(`GET request sent to ${requestString}`)
+    return axios
+        .get(requestString, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
+            type: 'GET_RECOMMENDATIONS_FAIL',
+            error,
+        }));
+};
+
+/**
  * Update password
  */
 export const updatePassword = (username, newPassword) => {
