@@ -19,38 +19,6 @@ export default function Home() {
   const [showResults, setShowResults] = useState(false);
   const [games, setGames] = useState([]);
 
-  // const selectStyles = {
-  //   control: (styles) => ({
-  //     ...styles,
-  //     minHeight: 15,
-  //     backgroundColor: "white",
-  //   }),
-  //   option: (styles, { data, isDisabled, isSelected }) => {
-  //     return {
-  //       ...styles,
-  //       color: "white",
-  //       backgroundColor: "#7F00FF",
-  //       ":active": {
-  //         ...styles[":active"],
-  //         color: "white",
-  //         backgroundColor: "black",
-  //       },
-  //     };
-  //   },
-  //   multiValue: (styles, { data }) => {
-  //     return {
-  //       ...styles,
-  //       backgroundColor: "black",
-  //     };
-  //   },
-  //   multiValueLabel: (styles, { data }) => {
-  //     return {
-  //       ...styles,
-  //       color: "white",
-  //     };
-  //   },
-  // }
-
   const genres = [
     {
         label: "Point-and-click",
@@ -250,36 +218,29 @@ export default function Home() {
 
   return (
     <div className="main">
+      <h1 style={{color: "white", marginTop: "12vh"}}>Search for a Game </h1>
       <header className="Home-header">
         {!showResults && <div><Form>
           <FormGroup>
-            <Label for="gameName">
-              Game Name:
-            </Label>
             <Input
               type="text"
               value={name}
               id="game-name-input"
-              // placeholder=""
+              placeholder="Game Name"
               onChange={(e) => setName(e.target.value)}
               required
             />
           </FormGroup>
-          <br></br>
           <FormGroup>
-            <Label for="minRating">
-              Minimum Rating (out of 100):
-            </Label>
             <Input
               type="text"
               pattern="[0-9]*"
               value={minRating}
               id="game-min-rating-input"
-              // placeholder=""
+              placeholder="Minimum Rating (out of 100)"
               onChange={(e) => setMinRating(e.target.value)}
             />
           </FormGroup>
-          <br></br>
           <FormGroup>
             <Label for="platforms">
               Platforms:
@@ -289,15 +250,13 @@ export default function Home() {
                 isMulti
                 // className="platform-select"
                 options={platforms}
-                //styles={selectStyles}
+                id="platform-input"
                 placeholder="Select one or more platforms..."
                 onChange={setPlatforms}
                 value={selected_platforms}
               />
             </div>
           </FormGroup>
-          <br></br>
-          <br></br>
           <FormGroup>
             <Label for="genres">
               Genres:
@@ -305,17 +264,14 @@ export default function Home() {
             <div className = "Dropdown">
               <Select
                 isMulti
-                // className="platform-select"
+                id="genre-input"
                 options={genres}
-                //styles={selectStyles}
                 placeholder="Select one or more genres..."
                 onChange={setGenres}
                 value={selected_genres}
               />
             </div>
           </FormGroup>
-          <br></br>
-          <br></br>
         </Form>
         <Button
             onClick={

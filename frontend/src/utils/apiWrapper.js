@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'http://localhost:9000/api';
 
 /**
  * Returns the top 20 games requested by a user based on query attributes
@@ -119,10 +119,50 @@ export const isUser = (username, password) => {
             },
         })
         .catch((error) => ({
+            type: 'ADD_REVIEW_FAIL',
+            error,
+        }));
+};
+
+
+/**
+ * Add a user review for a game.
+ */
+ export const addReview = (gameId, userId, body) => {
+    let requestString = `${BASE_URL}/v1/addReview`;
+    requestString += `?gameId=${gameId}&userId=${userId}`;
+    console.log(`POST request sent to ${requestString}`);
+    return axios
+        .post(requestString, body, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
             type: 'ADD_FAVORITE_FAIL',
             error,
         }));
 };
+
+/**
+ * Get the list of favorite games of a user.
+ */
+ export const getReviews = (gameId) => {
+    let requestString = `${BASE_URL}/v1/getReviews`;
+    requestString += `?gameId=${gameId}`;
+    console.log(`GET request sent to ${requestString}`);
+    return axios
+        .get(requestString, {
+            headers: {
+                'Content-Type': 'application/JSON',
+            },
+        })
+        .catch((error) => ({
+            type: 'GET_REVIEWS_FAIL',
+            error,
+        }));
+};
+
 
 /**
  * Remove a favorite game for a user.
@@ -130,9 +170,9 @@ export const isUser = (username, password) => {
  export const removeFavorite = (gameId, userId) => {
     let requestString = `${BASE_URL}/v1/removeFavorite`;
     requestString += `?gameId=${gameId}&userId=${userId}`;
-    console.log(`POST request sent to ${requestString}`);
+    console.log(`DELETE request sent to ${requestString}`);
     return axios
-        .post(requestString, {
+        .delete(requestString, {
             headers: {
                 'Content-Type': 'application/JSON',
             },
@@ -149,7 +189,7 @@ export const isUser = (username, password) => {
  export const getFavorite = (userId) => {
     let requestString = `${BASE_URL}/v1/getFavorite`;
     requestString += `?userId=${userId}`;
-    console.log(`POST request sent to ${requestString}`);
+    console.log(`GET request sent to ${requestString}`);
     return axios
         .get(requestString, {
             headers: {

@@ -24,14 +24,10 @@ export default function Admin() {
   return (
     <div className="admin">
       <header className="Admin-header">
-        <h1>Your Favorite Games</h1>
+        <h1 style={{ marginTop: 16 }}>Your Favorite Games</h1>
         <Results games={games} isAdmin={true}/>
         <br></br>
-        <button className="ReturnHome" onClick={event =>  window.location.href='/game-searcher'}>
-            Return Home
-        </button>
       </header>
-      
     </div>
     
   );

@@ -1,5 +1,6 @@
 .main {
     text-align: center;
+    background-color: #282c34;
 }
 
 .Error {
@@ -7,8 +8,7 @@
 }
 
 .Login-header {
-    background-color: #282c34;
-    min-height: 100vh;
+    margin-top: 12vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,7 +17,7 @@
     color: white;
 }
 
-.Login {
+.btn {
     border-radius: 8px;
     background-color: #7F00FF;
     border: none;
@@ -31,11 +31,25 @@
     cursor: pointer;
 }
 
-.Update {
+.btn:hover {
+    transition: 0.3s;
+    background-color: #a200ff;
+}
+
+.update {
     color: white;
     background-color: #282c34;
     border: none;
     padding: 5px;
     font-size: 15px;
     text-decoration: underline;
+}
+
+.update:hover {
+    background-color: #282c34;
+    color: #c300ff;
+}
+
+.login-input {
+    margin-bottom: 24px;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import { isUser } from "../../utils/apiWrapper"
 import {
@@ -6,7 +6,6 @@ import {
   Form,
   FormGroup,
   Input,
-  Label,
 } from "reactstrap";
 
 export default function Login() {
@@ -31,7 +30,8 @@ export default function Login() {
 
   return (
     <div className="main">
-      <header className="Login-header">
+      <h1 style={{color: "white", marginTop: "24vh"}}>Welcome to Game Searcher</h1>
+      <div className="Login-header">
         {showResults ?
           <div className="Error">
             Incorrect Login
@@ -42,54 +42,47 @@ export default function Login() {
           </div>
         }
         <Form>
-          <FormGroup>
-            <Label for="username">
-              Username:
-            </Label>
+          <FormGroup className="login-input">
             <Input
               type="text"
               value={username}
               id="username-input"
-              // placeholder=""
+              className="login-input"
+              placeholder="Username"
               onChange={(e) => setUsername(e.target.value)}
               required
             />
           </FormGroup>
-          <br></br>
-          <FormGroup>
-            <Label for="password">
-              Password:
-            </Label>
+          <FormGroup className="login-input"> 
             <Input
               type="text"
               value={password}
               id="game-min-rating-input"
-              // placeholder=""
+              placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormGroup>
-          <br></br>
         </Form>
         <Button
             onClick={login}
             className="Login"
+            style={{marginBottom: 8}}
         >
           Login
         </Button>
-        <br></br>
         <Button
             onClick={event =>  window.location.href='/game-searcher/pass'}
-            className="Update"
+            className="update"
         >
           Change Password
         </Button>
-        <Button
+        {/* <Button
             onClick={event =>  window.location.href='/game-searcher/createaccount'}
-            className="Update"
+            className="update"
         >
           Create Account
-        </Button>
-      </header>
+        </Button> */}
+      </div>
     </div>
   );
 }

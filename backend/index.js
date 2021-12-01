@@ -22,8 +22,8 @@ db.connect((err) => {
     console.log("Connected to MySQL...")
 })
 
-app.listen(5000, () => {
-    console.log(`Server successfully started. Listening on port 5000...`)
+app.listen(9000, () => {
+    console.log(`Server successfully started. Listening on port 9000...`)
 })
 
 app.get('/api/v1/games', (req, res) => {
@@ -82,7 +82,7 @@ app.post('/api/v1/addFavorite', (req, res) => {
     });
 })
 
-app.post('/api/v1/removeFavorite', (req, res) => {
+app.delete('/api/v1/removeFavorite', (req, res) => {
     let gameId = req.query.gameId;
     let userId = req.query.userId;
     query = 'DELETE FROM User_Favorites_Game WHERE gameId =' + gameId + ' AND userId = ' + userId;
@@ -95,6 +95,26 @@ app.post('/api/v1/removeFavorite', (req, res) => {
 app.get('/api/v1/getFavorite', (req, res) => {
     let userId = req.query.userId;
     query = 'SELECT * FROM User_Favorites_Game u JOIN Game g ON u.gameId = g.gameId WHERE u.userId =' + userId;
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+})
+
+app.post('/api/v1/addReview', (req, res) => {
+    let gameId = req.query.gameId;
+    let userId = req.query.userId;
+    let { review } = req.body;
+    query = 'INSERT INTO User_Reviews_Game (gameId, userId, review) VALUES(' + gameId + ',' + userId + ',' + review + ')';
+    db.query(query, function (err, result) {
+        if (err) throw err;
+        res.send(result);
+    });
+})
+
+app.get('/api/v1/getReviews', (req, res) => {
+    let gameId = req.query.gameId;
+    query = 'SELECT userId, review FROM User_Reviews_Game WHERE gameId =' + gameId;
     db.query(query, function (err, result) {
         if (err) throw err;
         res.send(result);
