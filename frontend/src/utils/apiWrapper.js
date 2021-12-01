@@ -52,7 +52,7 @@ export const getGames = (name, rating, platforms, genres) => {
 /**
  * Gets Recommended Games
  */
-export const getRecommendedGames = (username, newPassword) => {
+export const getRecommendedGames = () => {
     let requestString = `${BASE_URL}/v1/getRecommendations`;
     console.log(`GET request sent to ${requestString}`)
     return axios
